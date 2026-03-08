@@ -1,6 +1,6 @@
 "use client";
 
-import { AnswerRecord } from "@/lib/types";
+import { AnswerRecord, DisplayMode } from "@/lib/types";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 
@@ -8,11 +8,31 @@ interface FeedbackScreenProps {
   record: AnswerRecord;
   isLast: boolean;
   onNext: () => void;
+  questionMode: DisplayMode;
+  choiceMode: DisplayMode;
 }
 
-export function FeedbackScreen({ record, isLast, onNext }: FeedbackScreenProps) {
+export function FeedbackScreen({
+  record,
+  isLast,
+  onNext,
+  questionMode,
+  choiceMode,
+}: FeedbackScreenProps) {
   const { question, selectedId, isCorrect } = record;
   const correctPoem = question.poem;
+
+  const kamiText =
+    choiceMode === "kanji" ? correctPoem.kamiNoKu : correctPoem.kamiNoKuKana;
+  const shimoText =
+    questionMode === "kanji" ? correctPoem.shimoNoKu : correctPoem.shimoNoKuKana;
+
+  const selectedPoem = question.choices.find((c) => c.id === selectedId);
+  const selectedText = selectedPoem
+    ? choiceMode === "kanji"
+      ? selectedPoem.kamiNoKu
+      : selectedPoem.kamiNoKuKana
+    : null;
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4 py-12">
@@ -34,7 +54,7 @@ export function FeedbackScreen({ record, isLast, onNext }: FeedbackScreenProps) 
         </div>
 
         {/* 自分の選択（不正解時） */}
-        {!isCorrect && selectedId !== null && (
+        {!isCorrect && selectedText !== null && (
           <div className="mb-3">
             <p className="mb-1 text-xs text-sumi/40">あなたの選択</p>
             <Card className="border-kurenai/40 opacity-60">
@@ -42,7 +62,7 @@ export function FeedbackScreen({ record, isLast, onNext }: FeedbackScreenProps) 
                 className="text-base text-sumi line-through"
                 style={{ fontFamily: "var(--font-serif-jp)" }}
               >
-                {question.choices.find((c) => c.id === selectedId)?.kamiNoKu}
+                {selectedText}
               </p>
             </Card>
           </div>
@@ -56,21 +76,17 @@ export function FeedbackScreen({ record, isLast, onNext }: FeedbackScreenProps) 
           <div style={{ fontFamily: "var(--font-serif-jp)" }}>
             <p className="mb-1 text-xs text-sumi/40">上の句</p>
             <p className="mb-3 text-xl leading-relaxed text-sumi">
-              {correctPoem.kamiNoKu}
+              {kamiText}
             </p>
             <p className="mb-1 text-xs text-sumi/40">下の句</p>
             <p className="mb-3 text-xl leading-relaxed text-sumi">
-              {correctPoem.shimoNoKu}
+              {shimoText}
             </p>
           </div>
           <p className="text-right text-sm text-sumi/60">{correctPoem.poet}</p>
         </Card>
 
-        <Button
-          size="lg"
-          className="w-full"
-          onClick={onNext}
-        >
+        <Button size="lg" className="w-full" onClick={onNext}>
           {isLast ? "けっかを見る" : "つぎへ"}
         </Button>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { QuizQuestion } from "@/lib/types";
+import { QuizQuestion, DisplayMode } from "@/lib/types";
 import { Card } from "@/components/ui/Card";
 
 interface QuizScreenProps {
@@ -8,6 +8,8 @@ interface QuizScreenProps {
   currentIndex: number;
   totalCount: number;
   onAnswer: (poemId: number) => void;
+  questionMode: DisplayMode;
+  choiceMode: DisplayMode;
 }
 
 export function QuizScreen({
@@ -15,7 +17,14 @@ export function QuizScreen({
   currentIndex,
   totalCount,
   onAnswer,
+  questionMode,
+  choiceMode,
 }: QuizScreenProps) {
+  const questionText =
+    questionMode === "kanji"
+      ? question.poem.shimoNoKu
+      : question.poem.shimoNoKuKana;
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4 py-12">
       <div className="w-full max-w-xl">
@@ -40,7 +49,7 @@ export function QuizScreen({
             className="text-2xl leading-relaxed text-sumi md:text-3xl"
             style={{ fontFamily: "var(--font-serif-jp)" }}
           >
-            {question.poem.shimoNoKu}
+            {questionText}
           </p>
         </Card>
 
@@ -49,16 +58,20 @@ export function QuizScreen({
           上の句を選んでください
         </p>
         <div className="space-y-3">
-          {question.choices.map((poem) => (
-            <button
-              key={poem.id}
-              onClick={() => onAnswer(poem.id)}
-              className="w-full rounded-lg border-2 border-karuta-border bg-karuta-bg px-5 py-4 text-left text-base text-sumi transition-colors hover:border-indigo-wa hover:bg-indigo-wa/5"
-              style={{ fontFamily: "var(--font-serif-jp)" }}
-            >
-              {poem.kamiNoKu}
-            </button>
-          ))}
+          {question.choices.map((poem) => {
+            const choiceText =
+              choiceMode === "kanji" ? poem.kamiNoKu : poem.kamiNoKuKana;
+            return (
+              <button
+                key={poem.id}
+                onClick={() => onAnswer(poem.id)}
+                className="w-full rounded-lg border-2 border-karuta-border bg-karuta-bg px-5 py-4 text-left text-base text-sumi transition-colors hover:border-indigo-wa hover:bg-indigo-wa/5"
+                style={{ fontFamily: "var(--font-serif-jp)" }}
+              >
+                {choiceText}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
