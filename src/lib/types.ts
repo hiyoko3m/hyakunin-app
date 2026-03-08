@@ -18,6 +18,8 @@ export interface QuizQuestion {
 
 export type GamePhase = "setup" | "quiz" | "feedback" | "result";
 
+export type DisplayMode = "kanji" | "kana";
+
 export interface AnswerRecord {
   question: QuizQuestion;
   selectedId: number | null;
