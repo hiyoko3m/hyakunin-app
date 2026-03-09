@@ -10,7 +10,7 @@ import { Poem } from "@/lib/types";
 export const poems: Poem[] = [
   {
     id: 1,
-    kamiNoKu: "秋の田の かりほの庵の 苫をあらみ",
+    kamiNoKu: "秋の田の 仮庵の庵の 苫をあらみ",
     shimoNoKu: "わが衣手は 露にぬれつつ",
     kamiNoKuKana: "あきのたの かりほのいほの とまをあらみ",
     shimoNoKuKana: "わがころもでは つゆにぬれつつ",
