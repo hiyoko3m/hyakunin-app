@@ -16,12 +16,6 @@ export default function Home() {
       <Link href="/quiz/">
         <Button size="lg">はじめる</Button>
       </Link>
-      <Link
-        href="/attribution"
-        className="mt-8 text-xs text-sumi/40 underline underline-offset-2"
-      >
-        百人一首データの出典元
-      </Link>
     </div>
   );
 }

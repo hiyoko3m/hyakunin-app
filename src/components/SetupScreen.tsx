@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { CardCount, DisplayMode } from "@/lib/types";
 import { Button } from "@/components/ui/Button";
 
@@ -113,6 +114,12 @@ export function SetupScreen({
       <Button size="lg" onClick={() => onStart(selected)}>
         はじめる
       </Button>
+      <Link
+        href="/attribution"
+        className="mt-8 text-xs text-sumi/40 underline underline-offset-2"
+      >
+        百人一首データの出典元
+      </Link>
     </div>
   );
 }
