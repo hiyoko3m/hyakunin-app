@@ -3,7 +3,7 @@ import { Poem } from "@/lib/types";
 export const poems: Poem[] = [
   {
     id: 1,
-    kamiNoKu: "秋の田の かりほの庵の 苫をあらみ",
+    kamiNoKu: "秋の田の 仮庵の庵の 苫をあらみ",
     shimoNoKu: "わが衣手は 露にぬれつつ",
     kamiNoKuKana: "あきのたの かりほのいおの とまをあらみ",
     shimoNoKuKana: "わがころもでは つゆにぬれつつ",
@@ -12,7 +12,7 @@ export const poems: Poem[] = [
   },
   {
     id: 2,
-    kamiNoKu: "春すぎて 夏きにけらし 白たへの",
+    kamiNoKu: "春すぎて 夏来にけらし 白妙の",
     shimoNoKu: "衣ほすてふ 天の香具山",
     kamiNoKuKana: "はるすぎて なつきにけらし しろたえの",
     shimoNoKuKana: "ころもほすちょう あまのかぐやま",
@@ -22,7 +22,7 @@ export const poems: Poem[] = [
   {
     id: 3,
     kamiNoKu: "あしびきの 山鳥の尾の しだり尾の",
-    shimoNoKu: "ながながし夜を ひとりかも寝む",
+    shimoNoKu: "長々し夜を ひとりかも寝む",
     kamiNoKuKana: "あしびきの やまどりのおの しだりおの",
     shimoNoKuKana: "ながながしよを ひとりかもねむ",
     poet: "柿本人麻呂",
@@ -30,8 +30,8 @@ export const poems: Poem[] = [
   },
   {
     id: 4,
-    kamiNoKu: "たごの浦に うちいでてみれば 白妙の",
-    shimoNoKu: "富士の高嶺に 雪はふりつつ",
+    kamiNoKu: "田子の浦に うち出でてみれば 白妙の",
+    shimoNoKu: "富士の高嶺に 雪は降りつつ",
     kamiNoKuKana: "たごのうらに うちいでてみれば しろたえの",
     shimoNoKuKana: "ふじのたかねに ゆきはふりつつ",
     poet: "山部赤人",
@@ -39,8 +39,8 @@ export const poems: Poem[] = [
   },
   {
     id: 5,
-    kamiNoKu: "奥山に 紅葉ふみわけ 鳴く鹿の",
-    shimoNoKu: "声きくときぞ 秋はかなしき",
+    kamiNoKu: "奥山に 紅葉踏みわけ 鳴く鹿の",
+    shimoNoKu: "声きく時ぞ 秋は悲しき",
     kamiNoKuKana: "おくやまに もみじふみわけ なくしかの",
     shimoNoKuKana: "こえきくときぞ あきはかなしき",
     poet: "猿丸大夫",
@@ -49,7 +49,7 @@ export const poems: Poem[] = [
   {
     id: 6,
     kamiNoKu: "かささぎの 渡せる橋に おく霜の",
-    shimoNoKu: "白きを見れば 夜ぞふけにける",
+    shimoNoKu: "白きを見れば 夜ぞ更けにける",
     kamiNoKuKana: "かささぎの わたせるはしに おくしもの",
     shimoNoKuKana: "しろきをみれば よぞふけにける",
     poet: "中納言家持",
@@ -57,8 +57,8 @@ export const poems: Poem[] = [
   },
   {
     id: 7,
-    kamiNoKu: "あまの原 ふりさけみれば 春日なる",
-    shimoNoKu: "三笠の山に いでし月かも",
+    kamiNoKu: "天の原 ふりさけ見れば 春日なる",
+    shimoNoKu: "三笠の山に 出でし月かも",
     kamiNoKuKana: "あまのはら ふりさけみれば かすがなる",
     shimoNoKuKana: "みかさのやまに いでしつきかも",
     poet: "安倍仲麿",
@@ -75,7 +75,7 @@ export const poems: Poem[] = [
   },
   {
     id: 9,
-    kamiNoKu: "花の色は うつりにけりな いたずらに",
+    kamiNoKu: "花の色は うつりにけりな いたづらに",
     shimoNoKu: "わが身世にふる ながめせしまに",
     kamiNoKuKana: "はなのいろは うつりにけりな いたずらに",
     shimoNoKuKana: "わがみよにふる ながめせしまに",
@@ -147,9 +147,9 @@ export const poems: Poem[] = [
   },
   {
     id: 17,
-    kamiNoKu: "ちはやふる 神代もきかず 竜田川",
+    kamiNoKu: "ちはやぶる 神代もきかず 竜田川",
     shimoNoKu: "からくれなゐに 水くくるとは",
-    kamiNoKuKana: "ちはやふる かみよもきかず たつたがわ",
+    kamiNoKuKana: "ちはやぶる かみよもきかず たつたがわ",
     shimoNoKuKana: "からくれないに みずくくるとは",
     poet: "在原業平朝臣",
     poetKana: "ありわらのなりひらあそん",
@@ -787,9 +787,9 @@ export const poems: Poem[] = [
   {
     id: 88,
     kamiNoKu: "難波江の 芦のかりねの ひとよゆゑ",
-    shimoNoKu: "みをつくしても 逢はむとぞ思ふ",
+    shimoNoKu: "みをつくしてや 恋ひわたるべき",
     kamiNoKuKana: "なにわえの あしのかりねの ひとよゆえ",
-    shimoNoKuKana: "みをつくしても あわむとぞおもう",
+    shimoNoKuKana: "みをつくしてや こいわたるべき",
     poet: "皇嘉門院別当",
     poetKana: "こうかもんいんのべっとう",
   },
@@ -840,10 +840,10 @@ export const poems: Poem[] = [
   },
   {
     id: 94,
-    kamiNoKu: "吉野山 峰の白雪 ふみ分けて",
-    shimoNoKu: "入りにし人の 跡ぞ恋しき",
-    kamiNoKuKana: "よしのやま みねのしらゆき ふみわけて",
-    shimoNoKuKana: "いりにしひとの あとぞこいしき",
+    kamiNoKu: "み吉野の 山の秋風 小夜ふけて",
+    shimoNoKu: "ふるさと寒く 衣打つなり",
+    kamiNoKuKana: "みよしのの やまのあきかぜ さよふけて",
+    shimoNoKuKana: "ふるさとさむく ころもうつなり",
     poet: "参議雅経",
     poetKana: "さんぎまさつね",
   },
