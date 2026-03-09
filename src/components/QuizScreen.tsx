@@ -10,6 +10,8 @@ interface QuizScreenProps {
   onAnswer: (poemId: number) => void;
   questionMode: DisplayMode;
   choiceMode: DisplayMode;
+  isReviewLater: boolean;
+  onToggleReviewLater: () => void;
 }
 
 export function QuizScreen({
@@ -19,6 +21,8 @@ export function QuizScreen({
   onAnswer,
   questionMode,
   choiceMode,
+  isReviewLater,
+  onToggleReviewLater,
 }: QuizScreenProps) {
   const questionText =
     questionMode === "kanji"
@@ -43,8 +47,20 @@ export function QuizScreen({
         </div>
 
         {/* 下の句カード */}
-        <Card highlighted className="mb-6 text-center">
-          <p className="mb-1 text-xs text-sumi/50">下の句</p>
+        <Card highlighted className="relative mb-4 text-center">
+          <button
+            onClick={onToggleReviewLater}
+            title={isReviewLater ? "あとで復習を解除" : "あとで復習に追加"}
+            className={`absolute right-3 top-3 flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium transition-colors ${
+              isReviewLater
+                ? "bg-kincha/20 text-kincha"
+                : "bg-sumi/5 text-sumi/30 hover:bg-kincha/10 hover:text-kincha/70"
+            }`}
+          >
+            <span>{isReviewLater ? "★" : "☆"}</span>
+            <span>あとで復習</span>
+          </button>
+          <p className="mb-1 mt-1 text-xs text-sumi/50">下の句</p>
           <p
             className="text-2xl leading-relaxed text-sumi md:text-3xl"
             style={{ fontFamily: "var(--font-serif-jp)" }}
