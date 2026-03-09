@@ -20,3 +20,15 @@ export function buildSession(poems: Poem[], count: CardCount): QuizQuestion[] {
     return { poem, choices, correctId: poem.id };
   });
 }
+
+export function buildReviewSession(
+  targets: Poem[],
+  allPoems: Poem[]
+): QuizQuestion[] {
+  return shuffle(targets).map((poem) => {
+    const others = allPoems.filter((p) => p.id !== poem.id);
+    const wrong = shuffle(others).slice(0, 3);
+    const choices = shuffle([poem, ...wrong]);
+    return { poem, choices, correctId: poem.id };
+  });
+}

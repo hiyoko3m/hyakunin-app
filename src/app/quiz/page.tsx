@@ -16,9 +16,13 @@ export default function QuizPage() {
     totalCount,
     records,
     lastRecord,
+    reviewLaterIds,
+    reviewLaterPoems,
     startSession,
+    startReviewSession,
     submitAnswer,
     advance,
+    toggleReviewLater,
     restart,
   } = useQuiz();
 
@@ -51,6 +55,8 @@ export default function QuizPage() {
         onAnswer={submitAnswer}
         questionMode={questionMode}
         choiceMode={choiceMode}
+        isReviewLater={reviewLaterIds.has(question.poem.id)}
+        onToggleReviewLater={() => toggleReviewLater(question.poem.id)}
       />
     );
   }
@@ -68,7 +74,23 @@ export default function QuizPage() {
   }
 
   if (phase === "result") {
-    return <ResultScreen records={records} onRestart={restart} />;
+    const wrongPoems = records
+      .filter((r) => !r.isCorrect)
+      .map((r) => r.question.poem);
+    const wrongPoemIds = new Set(wrongPoems.map((p) => p.id));
+    const reviewOnlyPoems = reviewLaterPoems.filter(
+      (p) => !wrongPoemIds.has(p.id)
+    );
+    const reviewTargets = [...wrongPoems, ...reviewOnlyPoems];
+
+    return (
+      <ResultScreen
+        records={records}
+        reviewLaterPoems={reviewLaterPoems}
+        onRestart={restart}
+        onStartReview={() => startReviewSession(reviewTargets)}
+      />
+    );
   }
 
   return null;

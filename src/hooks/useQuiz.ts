@@ -2,12 +2,13 @@
 
 import { useState, useCallback } from "react";
 import { poems } from "@/data/poems";
-import { buildSession } from "@/lib/quiz";
+import { buildSession, buildReviewSession } from "@/lib/quiz";
 import {
   CardCount,
   GamePhase,
   QuizQuestion,
   AnswerRecord,
+  Poem,
 } from "@/lib/types";
 
 interface QuizState {
@@ -16,6 +17,7 @@ interface QuizState {
   currentIndex: number;
   records: AnswerRecord[];
   lastRecord: AnswerRecord | null;
+  reviewLaterIds: Set<number>;
 }
 
 const initialState: QuizState = {
@@ -24,6 +26,7 @@ const initialState: QuizState = {
   currentIndex: 0,
   records: [],
   lastRecord: null,
+  reviewLaterIds: new Set(),
 };
 
 export function useQuiz() {
@@ -37,6 +40,19 @@ export function useQuiz() {
       currentIndex: 0,
       records: [],
       lastRecord: null,
+      reviewLaterIds: new Set(),
+    });
+  }, []);
+
+  const startReviewSession = useCallback((targets: Poem[]) => {
+    const questions = buildReviewSession(targets, poems);
+    setState({
+      phase: "quiz",
+      questions,
+      currentIndex: 0,
+      records: [],
+      lastRecord: null,
+      reviewLaterIds: new Set(),
     });
   }, []);
 
@@ -70,9 +86,25 @@ export function useQuiz() {
     });
   }, []);
 
+  const toggleReviewLater = useCallback((poemId: number) => {
+    setState((prev) => {
+      const next = new Set(prev.reviewLaterIds);
+      if (next.has(poemId)) {
+        next.delete(poemId);
+      } else {
+        next.add(poemId);
+      }
+      return { ...prev, reviewLaterIds: next };
+    });
+  }, []);
+
   const restart = useCallback(() => {
     setState(initialState);
   }, []);
+
+  const reviewLaterPoems = state.questions
+    .filter((q) => state.reviewLaterIds.has(q.poem.id))
+    .map((q) => q.poem);
 
   return {
     phase: state.phase,
@@ -81,9 +113,13 @@ export function useQuiz() {
     totalCount: state.questions.length,
     records: state.records,
     lastRecord: state.lastRecord,
+    reviewLaterIds: state.reviewLaterIds,
+    reviewLaterPoems,
     startSession,
+    startReviewSession,
     submitAnswer,
     advance,
+    toggleReviewLater,
     restart,
   };
 }
